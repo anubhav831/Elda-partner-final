@@ -1,0 +1,477 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Join elda. — Senior Care Partner</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700;800;900&family=Playfair+Display:ital,wght@0,700;1,400&family=Libre+Baskerville:ital,wght@0,400;1,400&family=Tiro+Devanagari+Hindi:ital@0;1&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    :root {
+      --g: #4f896b; --gd: #3a6b52; --gl: #e8f2ec; --gm: #c2dace;
+      --cr: #f6f1ea; --cb: #e0d8cc; --tx: #1a2e22; --mu: #6b7e72; --wh: #fff;
+    }
+    html { scroll-behavior: smooth; }
+    body { font-family: 'Libre Baskerville', serif; background: var(--cr); color: var(--tx); }
+
+    /* LANG */
+    .lang-bar { background: var(--tx); display: flex; justify-content: flex-end; padding: 7px 48px; gap: 6px; }
+    .lb { font-family: 'Montserrat', sans-serif; font-size: 11px; font-weight: 800; padding: 5px 18px; border-radius: 20px; border: 2px solid rgba(246,241,234,.3); background: transparent; color: rgba(246,241,234,.6); cursor: pointer; transition: all .15s; letter-spacing: .5px; }
+    .lb.on { background: var(--cr); color: var(--tx); border-color: var(--cr); }
+
+    /* NAV */
+    nav { position: sticky; top: 0; z-index: 99; background: var(--wh); border-bottom: 2px solid var(--tx); height: 66px; display: flex; align-items: center; justify-content: space-between; padding: 0 48px; }
+    .logo { font-family: 'Montserrat', sans-serif; font-weight: 900; font-size: 24px; color: var(--g); text-decoration: none; letter-spacing: -1px; }
+    .logo small { font-family: 'Playfair Display', serif; font-weight: 400; font-style: italic; font-size: 13px; color: var(--mu); margin-left: 8px; letter-spacing: 0; }
+    .ncta { font-family: 'Montserrat', sans-serif; font-size: 12px; font-weight: 800; padding: 10px 22px; background: var(--tx); color: var(--cr); border-radius: 6px; text-decoration: none; transition: background .15s; letter-spacing: .3px; }
+    .ncta:hover { background: var(--g); }
+
+    /* HERO */
+    .hero { background: var(--tx); padding: 72px 48px 64px; display: grid; grid-template-columns: 1fr 1fr; gap: 56px; align-items: center; position: relative; overflow: hidden; }
+    .hero::before { content: ''; position: absolute; top: -80px; right: -80px; width: 400px; height: 400px; border-radius: 50%; background: rgba(79,137,107,.15); pointer-events: none; }
+    .eyebrow { font-family: 'Montserrat', sans-serif; font-size: 10px; font-weight: 800; letter-spacing: 3px; text-transform: uppercase; color: var(--g); margin-bottom: 16px; display: flex; align-items: center; gap: 8px; }
+    .eyebrow::before { content: ''; display: inline-block; width: 24px; height: 2px; background: var(--g); }
+    .htitle { font-family: 'Montserrat', sans-serif; font-size: 48px; font-weight: 900; color: var(--cr); line-height: 1.05; margin-bottom: 10px; letter-spacing: -1px; }
+    .htitle em { color: var(--g); font-style: normal; display: block; }
+    .hsubtitle { font-family: 'Playfair Display', serif; font-size: 20px; font-style: italic; color: rgba(246,241,234,.6); margin-bottom: 22px; line-height: 1.4; }
+    .hdesc { font-size: 14px; color: rgba(246,241,234,.75); line-height: 1.9; margin-bottom: 28px; }
+    .pills { display: flex; flex-wrap: wrap; gap: 8px; }
+    .pill { font-family: 'Montserrat', sans-serif; font-size: 11px; font-weight: 700; padding: 6px 14px; border-radius: 4px; background: rgba(79,137,107,.2); border: 1px solid rgba(79,137,107,.4); color: var(--gm); letter-spacing: .3px; }
+    .pill.hl { background: var(--g); color: var(--cr); border-color: var(--g); font-size: 12px; padding: 7px 16px; }
+    .pill.ref { background: rgba(255,200,80,.12); border-color: rgba(255,200,80,.4); color: #f5c842; }
+
+    /* REFERRAL BANNER */
+    .ref-banner { margin-top: 20px; background: rgba(245,200,66,.08); border: 1.5px solid rgba(245,200,66,.35); border-radius: 8px; padding: 12px 16px; display: flex; align-items: center; gap: 12px; }
+    .ref-icon { font-size: 22px; flex-shrink: 0; }
+    .ref-text { font-family: 'Montserrat', sans-serif; font-size: 12px; font-weight: 700; color: #f5c842; line-height: 1.5; letter-spacing: .2px; }
+    .ref-text span { font-weight: 400; color: rgba(245,200,66,.75); display: block; font-size: 11px; margin-top: 1px; }
+
+    /* FORM CARD */
+    .fcard { background: var(--wh); border-radius: 12px; padding: 32px 28px; box-shadow: 0 0 0 3px var(--g), 0 20px 60px rgba(0,0,0,.35); }
+    .ftitle { font-family: 'Montserrat', sans-serif; font-size: 18px; font-weight: 900; color: var(--tx); margin-bottom: 3px; letter-spacing: -.3px; }
+    .fsub { font-style: italic; font-size: 13px; color: var(--mu); margin-bottom: 20px; }
+    .frow { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-bottom: 12px; }
+    .frow.one { grid-template-columns: 1fr; }
+    .fg { display: flex; flex-direction: column; gap: 5px; }
+    .fl { font-family: 'Montserrat', sans-serif; font-size: 9px; font-weight: 800; letter-spacing: 1px; text-transform: uppercase; color: var(--mu); }
+    .fi { font-family: 'Libre Baskerville', serif; font-size: 14px; padding: 10px 12px; border: 2px solid var(--cb); border-radius: 6px; background: var(--cr); color: var(--tx); outline: none; width: 100%; transition: border-color .15s; }
+    .fi:focus { border-color: var(--g); background: var(--wh); }
+    .rg { display: flex; gap: 8px; }
+    .ro { flex: 1; display: flex; align-items: center; justify-content: center; padding: 10px 8px; border: 2px solid var(--cb); border-radius: 6px; background: var(--cr); cursor: pointer; font-family: 'Montserrat', sans-serif; font-size: 12px; font-weight: 700; color: var(--mu); transition: all .15s; user-select: none; text-align: center; letter-spacing: .2px; }
+    .ro:hover { border-color: var(--g); color: var(--g); background: var(--gl); }
+    .ro.sel { border-color: var(--g); background: var(--g); color: var(--wh); }
+    .sbtn { width: 100%; padding: 14px; background: var(--tx); color: var(--cr); font-family: 'Montserrat', sans-serif; font-size: 14px; font-weight: 900; border: none; border-radius: 6px; cursor: pointer; margin-top: 8px; transition: background .15s; letter-spacing: .3px; }
+    .sbtn:hover { background: var(--g); }
+    .sbtn:disabled { background: var(--mu); cursor: not-allowed; }
+    .fnote { font-style: italic; font-size: 11px; color: var(--mu); text-align: center; margin-top: 8px; }
+    .err { font-family: 'Montserrat', sans-serif; font-size: 12px; font-weight: 600; color: #b91c1c; background: #fef2f2; border: 2px solid #fecaca; border-radius: 6px; padding: 10px 12px; margin-top: 10px; display: none; }
+
+    /* SUCCESS */
+    .succ { display: none; text-align: center; padding: 20px 0; }
+    .sico { width: 64px; height: 64px; border-radius: 50%; background: var(--g); display: flex; align-items: center; justify-content: center; margin: 0 auto 16px; }
+    .sico svg { width: 28px; height: 28px; stroke: var(--wh); fill: none; stroke-width: 3; stroke-linecap: round; stroke-linejoin: round; }
+    .stitle { font-family: 'Montserrat', sans-serif; font-size: 20px; font-weight: 900; color: var(--tx); margin-bottom: 8px; letter-spacing: -.3px; }
+    .sdesc { font-style: italic; font-size: 14px; color: var(--mu); line-height: 1.7; }
+
+    /* SECTIONS */
+    .sec { padding: 72px 48px; }
+    .sec.wh { background: var(--wh); }
+    .sec.cr { background: var(--cr); }
+    .sec.dk { background: var(--tx); }
+    .seyebrow { font-family: 'Montserrat', sans-serif; font-size: 10px; font-weight: 800; letter-spacing: 3px; text-transform: uppercase; color: var(--g); text-align: center; margin-bottom: 10px; }
+    .stit { font-family: 'Montserrat', sans-serif; font-size: 34px; font-weight: 900; color: var(--tx); text-align: center; margin-bottom: 8px; line-height: 1.1; letter-spacing: -.5px; }
+    .sec.dk .stit { color: var(--cr); }
+    .ssub { font-family: 'Playfair Display', serif; font-style: italic; font-size: 16px; color: var(--mu); text-align: center; margin-bottom: 48px; }
+    .sec.dk .ssub { color: rgba(246,241,234,.5); }
+
+    /* BENEFIT CARDS */
+    .bgrid { display: grid; grid-template-columns: repeat(3,1fr); gap: 16px; max-width: 960px; margin: 0 auto; }
+    .bc { background: var(--cr); border-radius: 10px; border: 2px solid var(--cb); padding: 22px 20px; transition: border-color .2s, transform .2s; }
+    .bc:hover { border-color: var(--g); transform: translateY(-2px); }
+    .bc.gold { border-color: rgba(245,200,66,.5); background: rgba(245,200,66,.05); }
+    .bico { width: 40px; height: 40px; border-radius: 8px; background: var(--g); display: flex; align-items: center; justify-content: center; font-size: 18px; margin-bottom: 12px; }
+    .bc.gold .bico { background: rgba(245,200,66,.2); }
+    .btit { font-family: 'Montserrat', sans-serif; font-size: 13px; font-weight: 800; color: var(--tx); margin-bottom: 5px; letter-spacing: -.2px; }
+    .bc.gold .btit { color: #9a7800; }
+    .bdesc { font-size: 13px; color: var(--mu); line-height: 1.7; }
+
+    /* REFERRAL SECTION */
+    .ref-section { max-width: 700px; margin: 0 auto 0; background: var(--g); border-radius: 14px; padding: 32px; display: flex; gap: 24px; align-items: center; }
+    .ref-big { font-size: 48px; flex-shrink: 0; }
+    .ref-content {}
+    .ref-heading { font-family: 'Montserrat', sans-serif; font-size: 22px; font-weight: 900; color: var(--cr); margin-bottom: 6px; letter-spacing: -.3px; }
+    .ref-body { font-size: 14px; color: rgba(246,241,234,.8); line-height: 1.7; }
+    .ref-amount { font-family: 'Montserrat', sans-serif; font-size: 32px; font-weight: 900; color: #f5c842; line-height: 1; margin: 8px 0 6px; }
+
+    /* ROLE */
+    .wgrid { display: grid; grid-template-columns: 1fr 1fr; gap: 44px; max-width: 960px; margin: 0 auto; align-items: start; }
+    .wlist { list-style: none; }
+    .wi { display: flex; gap: 14px; padding: 14px 0; border-bottom: 1px solid var(--cb); }
+    .wi:last-child { border-bottom: none; }
+    .wd { width: 32px; height: 32px; border-radius: 6px; background: var(--g); display: flex; align-items: center; justify-content: center; font-size: 14px; flex-shrink: 0; margin-top: 2px; }
+    .wt { font-size: 14px; color: var(--tx); line-height: 1.7; }
+    .wt strong { display: block; font-family: 'Montserrat', sans-serif; font-size: 12px; font-weight: 800; color: var(--tx); margin-bottom: 3px; letter-spacing: -.1px; }
+    .tcard { background: var(--g); border-radius: 12px; padding: 28px 24px; }
+    .tbadge { display: inline-block; font-family: 'Montserrat', sans-serif; font-size: 9px; font-weight: 800; letter-spacing: 2px; text-transform: uppercase; background: rgba(246,241,234,.15); border: 1px solid rgba(246,241,234,.3); color: var(--cr); padding: 5px 12px; border-radius: 4px; margin-bottom: 14px; }
+    .ttit { font-family: 'Montserrat', sans-serif; font-size: 20px; font-weight: 900; color: var(--cr); margin-bottom: 10px; line-height: 1.2; letter-spacing: -.3px; }
+    .tdesc { font-size: 13px; color: rgba(246,241,234,.75); line-height: 1.85; margin-bottom: 18px; }
+    .tsteps { display: flex; flex-direction: column; gap: 10px; }
+    .ts { display: flex; align-items: center; gap: 12px; }
+    .tsn { width: 26px; height: 26px; border-radius: 50%; background: rgba(246,241,234,.15); border: 1.5px solid rgba(246,241,234,.35); font-family: 'Montserrat', sans-serif; font-size: 10px; font-weight: 800; color: var(--cr); display: flex; align-items: center; justify-content: center; flex-shrink: 0; }
+    .tst { font-family: 'Montserrat', sans-serif; font-size: 12px; font-weight: 600; color: rgba(246,241,234,.88); }
+
+    /* FOOTER */
+    footer { background: var(--tx); padding: 40px 48px; display: flex; align-items: center; justify-content: space-between; border-top: 3px solid var(--g); }
+    .flogo { font-family: 'Montserrat', sans-serif; font-weight: 900; font-size: 22px; color: var(--cr); letter-spacing: -1px; }
+    .fslogan { font-family: 'Playfair Display', serif; font-style: italic; font-size: 13px; color: rgba(246,241,234,.4); }
+    .fcon { font-family: 'Montserrat', sans-serif; font-size: 12px; font-weight: 700; color: var(--gm); }
+
+    /* HINDI — only swap font, preserve layout */
+    .hindi-text { font-family: 'Tiro Devanagari Hindi', serif; }
+
+    @media(max-width:768px) {
+      .lang-bar, nav, .hero, .sec, footer { padding-left: 20px; padding-right: 20px; }
+      .hero { grid-template-columns: 1fr; padding-top: 44px; padding-bottom: 36px; gap: 28px; }
+      .htitle { font-size: 34px; }
+      .bgrid { grid-template-columns: 1fr; }
+      .wgrid { grid-template-columns: 1fr; gap: 28px; }
+      .frow { grid-template-columns: 1fr; }
+      footer { flex-direction: column; gap: 14px; text-align: center; }
+      .ref-section { flex-direction: column; text-align: center; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- LANG BAR -->
+<div class="lang-bar">
+  <button class="lb on" id="lb-en" onclick="setLang('en')">EN</button>
+  <button class="lb" id="lb-hi" onclick="setLang('hi')">हि</button>
+</div>
+
+<!-- NAV -->
+<nav>
+  <a href="https://getelda.com" class="logo">elda.<small id="nav-sub">partner portal</small></a>
+  <a href="#apply" class="ncta" id="nav-cta">Apply Now</a>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <div>
+    <div class="eyebrow" id="eyebrow">Now Hiring in Gurgaon</div>
+    <h1 class="htitle" id="htitle">Care for a senior. <em>Change a life.</em></h1>
+    <p class="hsubtitle" id="hsubtitle">Trusted. Empathetic. On demand.</p>
+    <p class="hdesc" id="hdesc">Join elda. as a Senior Care Partner — a meaningful role where you become extended family for the seniors we serve. We give you everything you need to thrive.</p>
+    <div class="pills">
+      <span class="pill hl" id="p-sal">&#8377;20,000+ / month</span>
+      <span class="pill" id="p-inc">+ Performance Bonus</span>
+      <span class="pill" id="p-stay">🏠 Free Stay in Gurgaon</span>
+      <span class="pill" id="p-train">7-Day Training</span>
+      <span class="pill ref" id="p-ref">🎁 ₹2,000 Referral Bonus</span>
+    </div>
+    <div class="ref-banner">
+      <div class="ref-icon">🎁</div>
+      <div class="ref-text" id="ref-banner-text">
+        Earn ₹2,000 for every partner you refer!
+        <span>Refer a friend who joins elda. and get ₹2,000 added to your next salary.</span>
+      </div>
+    </div>
+  </div>
+
+  <div id="apply">
+    <div class="fcard">
+      <div class="ftitle" id="f-title">Apply to Join elda.</div>
+      <div class="fsub" id="f-sub">Takes 2 minutes. We'll call you within 24 hours.</div>
+      <form id="the-form">
+        <div class="frow">
+          <div class="fg">
+            <label class="fl" id="l-name">Full Name</label>
+            <input class="fi" id="f-name" type="text" required />
+          </div>
+          <div class="fg">
+            <label class="fl" id="l-age">Age</label>
+            <input class="fi" id="f-age" type="number" min="18" max="65" required />
+          </div>
+        </div>
+        <div class="frow">
+          <div class="fg">
+            <label class="fl" id="l-phone">Phone Number</label>
+            <input class="fi" id="f-phone" type="tel" required />
+          </div>
+          <div class="fg">
+            <label class="fl" id="l-loc">Current Location</label>
+            <input class="fi" id="f-loc" type="text" required />
+          </div>
+        </div>
+        <div class="frow one">
+          <div class="fg">
+            <label class="fl" id="l-exp">Senior Care Experience?</label>
+            <div class="rg">
+              <div class="ro" id="opt-y" onclick="pick('Yes', this)">
+                <span id="exp-yes">✓ Yes, I have</span>
+              </div>
+              <div class="ro" id="opt-n" onclick="pick('No', this)">
+                <span id="exp-no">No, but willing</span>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="frow one">
+          <div class="fg">
+            <label class="fl" id="l-sal">Monthly Salary Expectation (&#8377;)</label>
+            <input class="fi" id="f-sal" type="text" required />
+          </div>
+        </div>
+        <div class="err" id="err-box"></div>
+        <button class="sbtn" id="sbtn" type="submit"><span id="btn-txt">Submit Application →</span></button>
+        <p class="fnote" id="fnote">Your information is safe with us. No spam, ever.</p>
+      </form>
+      <div class="succ" id="succ">
+        <div class="sico"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg></div>
+        <div class="stitle" id="s-title">Application Received!</div>
+        <div class="sdesc" id="s-desc">Thank you. Our team will call you within 24 hours.<br/>Welcome to the elda. family.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- BENEFITS -->
+<section class="sec wh">
+  <div class="seyebrow" id="b-eyebrow">Why elda.</div>
+  <h2 class="stit" id="b-title">A job built around you.</h2>
+  <p class="ssub" id="b-sub">Dignity, purpose, and real financial stability.</p>
+  <div class="bgrid">
+    <div class="bc"><div class="bico">&#8377;</div><div class="btit" id="b1t">₹20,000+ Salary</div><div class="bdesc" id="b1d">Competitive monthly salary from ₹20,000 with performance bonuses for excellent care.</div></div>
+    <div class="bc"><div class="bico">🏠</div><div class="btit" id="b2t">Free Stay in Gurgaon</div><div class="bdesc" id="b2d">Comfortable accommodation fully provided. No rent, no deposit, no worry.</div></div>
+    <div class="bc"><div class="bico">📈</div><div class="btit" id="b3t">Monthly Bonuses</div><div class="bdesc" id="b3d">Go above and beyond and earn meaningful performance bonuses every month.</div></div>
+    <div class="bc gold"><div class="bico">🎁</div><div class="btit" id="b4t">₹2,000 Referral Bonus</div><div class="bdesc" id="b4d">Refer a friend who joins elda. and earn ₹2,000 added directly to your salary. No limit.</div></div>
+    <div class="bc"><div class="bico">🎓</div><div class="btit" id="b5t">7-Day Free Training</div><div class="bdesc" id="b5d">No experience needed. We train every partner from scratch — hands-on and fully paid.</div></div>
+    <div class="bc"><div class="bico">❤️</div><div class="btit" id="b6t">Meaningful Work</div><div class="bdesc" id="b6d">Become the most trusted person in a senior's daily life — valued, loved, and respected.</div></div>
+  </div>
+</section>
+
+<!-- REFERRAL SPOTLIGHT -->
+<section class="sec cr" style="padding-top:0; padding-bottom: 64px;">
+  <div class="ref-section">
+    <div class="ref-big">🎁</div>
+    <div class="ref-content">
+      <div class="ref-heading" id="ref-heading">Refer a friend. Earn ₹2,000.</div>
+      <div class="ref-amount">₹2,000 / referral</div>
+      <div class="ref-body" id="ref-body">Know someone who'd make a great care partner? Refer them to elda. — and when they join, we add ₹2,000 straight to your salary. No cap, no forms, no waiting.</div>
+    </div>
+  </div>
+</section>
+
+<!-- ROLE -->
+<section class="sec cr" style="padding-top: 32px;">
+  <div style="text-align:center;margin-bottom:44px">
+    <div class="seyebrow" id="r-eyebrow">The Role</div>
+    <h2 class="stit" id="r-title">What you'll do every day</h2>
+    <p class="ssub" id="r-sub">Caring, consistent, compassionate — that's the elda. partner.</p>
+  </div>
+  <div class="wgrid">
+    <ul class="wlist">
+      <li class="wi"><div class="wd">🛁</div><div class="wt"><strong id="r1t">Personal Hygiene Support</strong><span id="r1d">Help seniors with bathing, grooming, and daily hygiene — with warmth and dignity.</span></div></li>
+      <li class="wi"><div class="wd">💬</div><div class="wt"><strong id="r2t">Companionship & Conversation</strong><span id="r2d">Spend quality time — talk, listen, play games. Loneliness is the enemy.</span></div></li>
+      <li class="wi"><div class="wd">🚶</div><div class="wt"><strong id="r3t">Daily Walks & Light Exercise</strong><span id="r3d">Accompany seniors on morning or evening walks. Keep them active and safe.</span></div></li>
+      <li class="wi"><div class="wd">💆</div><div class="wt"><strong id="r4t">Massage & Physical Comfort</strong><span id="r4d">Gentle massage to ease aches, improve circulation, and bring relief.</span></div></li>
+      <li class="wi"><div class="wd">🍽️</div><div class="wt"><strong id="r5t">Daily Needs Assistance</strong><span id="r5d">Help with meals, medicines, mobility, and general daily routines.</span></div></li>
+    </ul>
+    <div class="tcard">
+      <div class="tbadge" id="tr-badge">Training Program</div>
+      <div class="ttit" id="tr-title">7 Days. Fully trained. Fully confident.</div>
+      <div class="tdesc" id="tr-desc">No prior experience required. We train every partner from scratch — hands-on, practical, and fully paid. By Day 7 you're ready for anything.</div>
+      <div class="tsteps">
+        <div class="ts"><div class="tsn">1</div><div class="tst" id="ts1">Senior care fundamentals & safety</div></div>
+        <div class="ts"><div class="tsn">2</div><div class="tst" id="ts2">Personal hygiene & grooming</div></div>
+        <div class="ts"><div class="tsn">3</div><div class="tst" id="ts3">Companionship & emotional support</div></div>
+        <div class="ts"><div class="tsn">4</div><div class="tst" id="ts4">Emergency response basics</div></div>
+        <div class="ts"><div class="tsn">5</div><div class="tst" id="ts5">elda. systems & reporting</div></div>
+        <div class="ts"><div class="tsn">6-7</div><div class="tst" id="ts6">Live supervised practice</div></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="flogo">elda.</div>
+  <div class="fslogan" id="f-slogan">a concierge for modern aging</div>
+  <div class="fcon">+91 92113 45444 &middot; hello@getelda.com</div>
+</footer>
+
+<script>
+  var FORM_ACTION = 'https://docs.google.com/forms/d/e/1FAIpQLScRWXdporXAKi9WQDP2INc-9HsvZFLjXL9ZjliB5H_7lju40Q/formResponse';
+  var FIELDS = {
+    name:       'entry.1239372723',
+    age:        'entry.1300050841',
+    phone:      'entry.388066263',
+    location:   'entry.1335751389',
+    experience: 'entry.1889047254',
+    salary:     'entry.1941328919'
+  };
+
+  var exp = '';
+  var curLang = 'en';
+
+  var STRINGS = {
+    en: {
+      'nav-sub':'partner portal','nav-cta':'Apply Now',
+      'eyebrow':'Now Hiring in Gurgaon',
+      'htitle':'Care for a senior. <em>Change a life.</em>',
+      'hsubtitle':'Trusted. Empathetic. On demand.',
+      'hdesc':'Join elda. as a Senior Care Partner — a meaningful role where you become extended family for the seniors we serve.',
+      'p-sal':'₹20,000+ / month','p-inc':'+ Performance Bonus','p-stay':'🏠 Free Stay in Gurgaon','p-train':'7-Day Training','p-ref':'🎁 ₹2,000 Referral Bonus',
+      'ref-banner-text':'Earn ₹2,000 for every partner you refer!<span>Refer a friend who joins elda. and get ₹2,000 added to your next salary.</span>',
+      'f-title':'Apply to Join elda.','f-sub':"Takes 2 minutes. We'll call you within 24 hours.",
+      'l-name':'Full Name','l-age':'Age','l-phone':'Phone Number','l-loc':'Current Location',
+      'l-exp':'Senior Care Experience?','exp-yes':'✓ Yes, I have','exp-no':'No, but willing',
+      'l-sal':'Monthly Salary Expectation (₹)',
+      'btn-txt':'Submit Application →','fnote':'Your information is safe with us. No spam, ever.',
+      's-title':'Application Received!','s-desc':'Thank you. Our team will call you within 24 hours.<br/>Welcome to the elda. family.',
+      'b-eyebrow':'Why elda.','b-title':'A job built around you.','b-sub':'Dignity, purpose, and real financial stability.',
+      'b1t':'₹20,000+ Salary','b1d':'Competitive monthly salary from ₹20,000 with performance bonuses for excellent care.',
+      'b2t':'Free Stay in Gurgaon','b2d':'Comfortable accommodation fully provided. No rent, no deposit, no worry.',
+      'b3t':'Monthly Bonuses','b3d':'Go above and beyond and earn meaningful performance bonuses every month.',
+      'b4t':'₹2,000 Referral Bonus','b4d':'Refer a friend who joins elda. and earn ₹2,000 added directly to your salary. No limit.',
+      'b5t':'7-Day Free Training','b5d':'No experience needed. We train every partner from scratch — hands-on and fully paid.',
+      'b6t':'Meaningful Work','b6d':"Become the most trusted person in a senior's daily life — valued, loved, and respected.",
+      'ref-heading':'Refer a friend. Earn ₹2,000.','ref-body':'Know someone great? Refer them to elda. — when they join, ₹2,000 goes straight to your salary. No cap, no forms.',
+      'r-eyebrow':'The Role','r-title':"What you'll do every day",'r-sub':"Caring, consistent, compassionate — that's the elda. partner.",
+      'r1t':'Personal Hygiene Support','r1d':'Help seniors with bathing, grooming, and daily hygiene — with warmth and dignity.',
+      'r2t':'Companionship & Conversation','r2d':'Spend quality time — talk, listen, play games. Loneliness is the enemy.',
+      'r3t':'Daily Walks & Light Exercise','r3d':'Accompany seniors on morning or evening walks. Keep them active and safe.',
+      'r4t':'Massage & Physical Comfort','r4d':'Gentle massage to ease aches, improve circulation, and bring relief.',
+      'r5t':'Daily Needs Assistance','r5d':'Help with meals, medicines, mobility, and general daily routines.',
+      'tr-badge':'Training Program','tr-title':'7 Days. Fully trained. Fully confident.',
+      'tr-desc':"No prior experience required. We train every partner from scratch — hands-on, practical, and fully paid. By Day 7 you're ready.",
+      'ts1':'Senior care fundamentals & safety','ts2':'Personal hygiene & grooming',
+      'ts3':'Companionship & emotional support','ts4':'Emergency response basics',
+      'ts5':'elda. systems & reporting','ts6':'Live supervised practice',
+      'f-slogan':'a concierge for modern aging',
+      'err-exp':'Please select whether you have senior care experience.',
+      'err-fail':'Something went wrong. Please try again or call +91 92113 45444.',
+      'submitting':'Submitting…'
+    },
+    hi: {
+      'nav-sub':'पार्टनर पोर्टल','nav-cta':'अभी आवेदन करें',
+      'eyebrow':'गुरुगाम में अभी भर्ती',
+      'htitle':'बुज़ुर्गों की देखभाल करें। <em>एक ज़िंदगी बदलें।</em>',
+      'hsubtitle':'भरोसेमंद। सहानुभूति से भरा। हर वक़्त।',
+      'hdesc':'elda. में Senior Care Partner बनें — एक सार्थक काम जहाँ आप बुज़ुर्गों के परिवार का हिस्सा बनते हैं।',
+      'p-sal':'₹20,000+ / महीना','p-inc':'+ परफॉर्मेंस बोनस','p-stay':'🏠 गुरुगाम में मुफ्त रहाइश','p-train':'7 दिन की ट्रेनिंग','p-ref':'🎁 ₹2,000 रेफरल बोनस',
+      'ref-banner-text':'हर रेफरल पर ₹2,000 कमाएं!<span>अपने दोस्त को elda. से जोड़ें और ₹2,000 अपनी सैलरी में पाएं।</span>',
+      'f-title':'elda. से जुड़ने के लिए आवेदन करें','f-sub':'सिर्फ 2 मिनट। हम 24 घंटे में कॉल करेंगे।',
+      'l-name':'पूरा नाम','l-age':'उम्र','l-phone':'फोन नंबर','l-loc':'वर्तमान शहर',
+      'l-exp':'बुज़ुर्ग देखभाल का अनुभव है?','exp-yes':'✓ हाँ, है','exp-no':'नहीं, पर सीखूँगा/सीखूँगी',
+      'l-sal':'मासिक वेतन अपेक्षा (₹)',
+      'btn-txt':'आवेदन जमा करें →','fnote':'आपकी जानकारी सुरक्षित है। कोई स्पैम नहीं।',
+      's-title':'आवेदन मिल गया!','s-desc':'धन्यवाद। हमारी टीम 24 घंटे में कॉल करेगी।<br/>elda. परिवार में आपका स्वागत है।',
+      'b-eyebrow':'elda. क्यों?','b-title':'आपके लिए बना काम।','b-sub':'सम्मान, मकसद, और असली आर्थिक स्थिरता।',
+      'b1t':'₹20,000+ वेतन','b1d':'₹20,000 से शुरू मासिक वेतन और अच्छे काम पर बोनस।',
+      'b2t':'गुरुगाम में मुफ्त रहाइश','b2d':'आरामदायक रहाइश बिल्कुल मुफ्त। न किराया, न जमा राशि।',
+      'b3t':'मासिक बोनस','b3d':'बेहतरीन देखभाल करने वाले पार्टनर हर महीने बोनस कमाते हैं।',
+      'b4t':'₹2,000 रेफरल बोनस','b4d':'किसी दोस्त को elda. से जोड़ें और सीधे ₹2,000 अपनी सैलरी में पाएं। कोई सीमा नहीं।',
+      'b5t':'7 दिन की फ्री ट्रेनिंग','b5d':'अनुभव ज़रूरी नहीं। हम सबको शुरू से ट्रेन करते हैं — हाथों-हाथ।',
+      'b6t':'सार्थक काम','b6d':'बुज़ुर्ग की ज़िंदगी में सबसे भरोसेमंद इंसान बनें — मूल्यवान, प्रिय, सम्मानित।',
+      'ref-heading':'दोस्त को लाएं। ₹2,000 पाएं।','ref-body':'कोई अच्छा उम्मीदवार जानते हैं? उन्हें elda. में भेजें — जब वो जॉइन करें, ₹2,000 सीधे आपकी सैलरी में।',
+      'r-eyebrow':'आपका काम','r-title':'हर रोज़ आप क्या करेंगे','r-sub':'स्नेही, नियमित, सहानुभूति से भरा — यही है elda. पार्टनर।',
+      'r1t':'स्वच्छता में सहायता','r1d':'नहाने, संवारने में गर्मजोशी और सम्मान से मदद।',
+      'r2t':'साथ समय बिताना','r2d':'बात करना, सुनना, खेलना। अकेलापन सबसे बड़ा दुश्मन है।',
+      'r3t':'सैर और हल्की कसरत','r3d':'सुबह-शाम सैर में साथ जाना और स्वस्थ रखना।',
+      'r4t':'मालिश और शारीरिक आराम','r4d':'दर्द पर आराम देने के लिए हल्की मालिश।',
+      'r5t':'रोज़मर्रा में सहायता','r5d':'खाना, दवाइयाँ, चलने-फिरने में मदद।',
+      'tr-badge':'ट्रेनिंग प्रोग्राम','tr-title':'7 दिन। पूरी ट्रेनिंग। पूरा आत्मविश्वास।',
+      'tr-desc':'पुराना अनुभव ज़रूरी नहीं। हम सबको शुरू से ट्रेन करते हैं — हाथों-हाथ, व्यावहारिक। Day 7 तक आप तैयार।',
+      'ts1':'बुज़ुर्ग देखभाल की बुनियादें','ts2':'स्वच्छता और अंग संवार',
+      'ts3':'साथ बिताना और भावनात्मक सहायता','ts4':'आपातकालीन प्रतिक्रिया',
+      'ts5':'elda. सिस्टम और रिपोर्टिंग','ts6':'लाइव निगरानी अभ्यास',
+      'f-slogan':'आधुनिक बुज़ुर्ग जीवन का कंसीयर्ह',
+      'err-exp':'कृपया बताएं कि क्या आपको बुज़ुर्ग देखभाल का अनुभव है।',
+      'err-fail':'कुछ गलत हो गया। कृपया दोबारा कोशिश करें या +91 92113 45444 पर कॉल करें।',
+      'submitting':'जमा हो रहा है…'
+    }
+  };
+
+  // Elements that need Hindi font applied via inline style (overrides CSS specificity)
+  var ALL_IDS = Object.keys(STRINGS.en);
+
+  function setLang(l) {
+    curLang = l;
+    document.getElementById('lb-en').classList.toggle('on', l === 'en');
+    document.getElementById('lb-hi').classList.toggle('on', l === 'hi');
+    var s = STRINGS[l];
+    var isHindi = (l === 'hi');
+    var hindiFontStack = "'Tiro Devanagari Hindi', serif";
+    ALL_IDS.forEach(function(id) {
+      var el = document.getElementById(id);
+      if (!el || s[id] === undefined) return;
+      el.innerHTML = s[id];
+      // Force font via inline style — beats any CSS specificity
+      el.style.fontFamily = isHindi ? hindiFontStack : '';
+      el.style.letterSpacing = isHindi ? '0' : '';
+      el.style.textTransform = isHindi ? 'none' : '';
+    });
+  }
+
+  function pick(val, el) {
+    exp = val;
+    document.getElementById('opt-y').classList.remove('sel');
+    document.getElementById('opt-n').classList.remove('sel');
+    el.classList.add('sel');
+  }
+
+  // Attach submit listener via JS — more reliable than onsubmit attribute
+  document.addEventListener('DOMContentLoaded', function() {
+    document.getElementById('the-form').addEventListener('submit', function(e) {
+      e.preventDefault();
+      e.stopPropagation();
+
+      document.getElementById('err-box').style.display = 'none';
+
+      if (!exp) {
+        var eb = document.getElementById('err-box');
+        eb.textContent = STRINGS[curLang]['err-exp'];
+        eb.style.display = 'block';
+        return;
+      }
+
+      var btn = document.getElementById('sbtn');
+      btn.disabled = true;
+      document.getElementById('btn-txt').textContent = STRINGS[curLang]['submitting'];
+
+      var body = [
+        encodeURIComponent(FIELDS.name)       + '=' + encodeURIComponent(document.getElementById('f-name').value.trim()),
+        encodeURIComponent(FIELDS.age)        + '=' + encodeURIComponent(document.getElementById('f-age').value.trim()),
+        encodeURIComponent(FIELDS.phone)      + '=' + encodeURIComponent(document.getElementById('f-phone').value.trim()),
+        encodeURIComponent(FIELDS.location)   + '=' + encodeURIComponent(document.getElementById('f-loc').value.trim()),
+        encodeURIComponent(FIELDS.experience) + '=' + encodeURIComponent(exp),
+        encodeURIComponent(FIELDS.salary)     + '=' + encodeURIComponent(document.getElementById('f-sal').value.trim())
+      ].join('&');
+
+      fetch(FORM_ACTION, {
+        method: 'POST',
+        mode: 'no-cors',
+        headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+        body: body
+      })
+      .then(function() {
+        document.getElementById('the-form').style.display = 'none';
+        document.getElementById('succ').style.display = 'block';
+      })
+      .catch(function() {
+        btn.disabled = false;
+        document.getElementById('btn-txt').innerHTML = STRINGS[curLang]['btn-txt'];
+        var eb = document.getElementById('err-box');
+        eb.textContent = STRINGS[curLang]['err-fail'];
+        eb.style.display = 'block';
+      });
+    });
+  });
+
+  setLang('en');
+</script>
+</body>
+</html>
